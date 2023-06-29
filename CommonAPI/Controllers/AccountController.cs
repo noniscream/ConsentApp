@@ -53,7 +53,7 @@ namespace CommonAPI.Controllers
                 x => x.UserName == loginDto.Username.ToLower()
             );
 
-            if (user.Equals(null)) return Unauthorized();
+            if (user == null) return Unauthorized();
 
             using var hmac = new HMACSHA512(user.PwsSalt);
             var computerHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
